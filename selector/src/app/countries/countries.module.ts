@@ -16,6 +16,7 @@ import { CountriesRoutingModule } from './countries-routing.module';
     CommonModule,
     CountriesRoutingModule,
     ReactiveFormsModule,
-  ]
+  ],
+  providers: [ /* servicios */]
 })
 export class CountriesModule { }

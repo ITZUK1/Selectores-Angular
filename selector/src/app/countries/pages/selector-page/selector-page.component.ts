@@ -13,8 +13,7 @@ import { Region, SmallCountry } from '../../interfaces/country.interfaces';
 })
 export class SelectorPageComponent implements OnInit {
 
-  public countriesByRegion: SmallCountry[] = [];
-  public borders: SmallCountry[] = [];
+  
 
   public myForm: FormGroup = this.fb.group({
     region : ['', Validators.required ],
@@ -30,7 +29,8 @@ export class SelectorPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.onRegionChanged();
-    }
+
+  }
 
 
   get regions(): Region[] {
@@ -39,6 +39,9 @@ export class SelectorPageComponent implements OnInit {
 
   onRegionChanged():void{
     this.myForm.get('region')!.valueChanges
-    .subscribe(regions =>{console.log({regions})})
+    .pipe(
+      switchMap(this.countriesService.getCountriesByRegion)
+    )
+    .subscribe(countries =>{console.log(({countries}))});
   }
 }
